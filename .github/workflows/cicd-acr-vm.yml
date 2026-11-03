@@ -84,10 +84,10 @@ jobs:
             set -e
             cd /home/${{ secrets.VM_USERNAME }}/voting-app-deploy
 
-            echo "$ACR_PASSWORD" | sudo docker login "$ACR_LOGIN_SERVER" -u "$ACR_USERNAME" --password-stdin
+            echo "$ACR_PASSWORD" | docker login "$ACR_LOGIN_SERVER" -u "$ACR_USERNAME" --password-stdin
 
             printf 'ACR_LOGIN_SERVER=%s\n' "$ACR_LOGIN_SERVER" > .env
 
-            sudo docker compose pull
-            sudo docker compose up -d --no-build --remove-orphans
-            sudo docker image prune -f
+            docker compose pull
+            docker compose up -d --no-build --remove-orphans
+            docker image prune -f
